@@ -31,11 +31,9 @@ Parts of the generated files are stored in this [folder](https://drive.google.co
 
 ## Explanations for parameters
    ```
-speaker_hidden_size/listener_hidden_size: Size of the hidden layers in the speaker/listener networks.
-
-meaning_embedding_dim/listener_embedding_size: Embedding size in the speaker/listener networks. 
-
-word_dropout_p: Word dropout rate for the input, interpreted as noise. 
+  speaker_hidden_size/listener_hidden_size: Size of the hidden layers in the speaker/listener networks.
+  meaning_embedding_dim/listener_embedding_size: Embedding size in the speaker/listener networks. 
+  word_dropout_p: Word dropout rate for the input, interpreted as noise. 
    ```
 
 ## Citation
