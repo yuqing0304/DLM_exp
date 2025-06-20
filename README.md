@@ -23,7 +23,7 @@ Parts of the generated files are stored in this [folder](https://drive.google.co
    git clone https://github.com/yuqing0304/DLM_exp.git
    cd DLM_exp
    ```
-4. Then, we can run a game, for example, communicating with an impatient listener (Impa) with the RNN architecture (rnn) using the verb-final language (final) of half meaning space (halfSM):
+4. Then, we can run a game, for example, communicating with an impatient listener (Impa) with the RNN architecture (rnn) using the verb-final subject-modified language (finalSM) of half meaning space (half):
     ```bash
    cd DLM_exp_impa/DLM_halffinalSMrnnImpa
    sbatch run.sh
@@ -32,10 +32,12 @@ Parts of the generated files are stored in this [folder](https://drive.google.co
 ## Explanations for parameters
    ```
 speaker_hidden_size/listener_hidden_size: Size of the hidden layers in the speaker/listener networks.
+
 meaning_embedding_dim/listener_embedding_size: Embedding size in the speaker/listener networks. 
+
 word_dropout_p: Word dropout rate for the input, interpreted as noise. 
    ```
-   
+
 ## Citation
 If you find this study useful in your research, please cite this paper:
 ```
