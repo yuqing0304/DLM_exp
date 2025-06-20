@@ -18,12 +18,12 @@ Parts of the generated files are stored in this [folder](https://drive.google.co
    ```
    cd EGG/egg/zoo
    ```
-3. Cloning the the current repo into the EGG game design folder:
+3. Cloning the current repo into the EGG game design folder:
    ```
    git clone https://github.com/yuqing0304/DLM_exp.git
    cd DLM_exp
    ```
-4. Then, we can run a game, for example, communicating with an impatient listener:
+4. Then, we can run a game, for example, communicating with an impatient listener using the verb-final language:
     ```bash
    cd DLM_exp_impa/DLM_halffinalSMrnnImpa
    sbatch run.sh
