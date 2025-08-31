@@ -9,7 +9,7 @@ Portions of this ongoing work have been published as [Endowing Neural Language L
 
 The implementation is based on the [NeLLCom](https://github.com/Yuchen-Lian/NeLLCom) framework and [EGG](https://github.com/facebookresearch/EGG) toolkit.
 
-Parts of the generated files are stored in this [folder](https://drive.google.com/drive/folders/1_eUHRisx2DP6s7hf6DXCUzxLnDvweNyB?usp=drive_link).
+<!-- Parts of the generated files are stored in this [folder](https://drive.google.com/drive/folders/1_eUHRisx2DP6s7hf6DXCUzxLnDvweNyB?usp=drive_link). -->
 
 ## Running experiments
 
@@ -25,7 +25,7 @@ Parts of the generated files are stored in this [folder](https://drive.google.co
    ```
 4. Then, we can run a game, for example, communicating with an impatient listener (Impa) with the RNN architecture (rnn) using the verb-final subject-modified language (finalSM) of half meaning space (half):
     ```bash
-   cd DLM_exp_impa/DLM_halffinalSMrnnImpa
+   cd DLM_exp_main2/DLM_halffinalSMrnnImpa
    sbatch run.sh
     ```
 
