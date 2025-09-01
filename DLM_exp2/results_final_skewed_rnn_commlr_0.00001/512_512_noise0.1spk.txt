@@ -32,7 +32,7 @@ agent_num: 3433
 60: {'percent_so_sm': 52.013422818791945, 'percent_os_sm': 47.81879194630873, 'percent_none_sm': 0.16778523489932887, 'percent_long': 47.89915966386555, 'percent_short': 52.100840336134446}
 agent_num: 3430
 0: {'percent_so_sm': 0.0, 'percent_os_sm': 0.0, 'percent_none_sm': 100.0, 'percent_long': 0, 'percent_short': 0}
-30: {'percent_so_sm': 46.65461121157324, 'percent_os_sm': 52.98372513562387, 'percent_none_sm': 0.3616636528028933, 'percent_long': 53.17604355716878, 'percent_short': 46.82395644283122}
+30: {'percent_so_sm': 46.835443037974684, 'percent_os_sm': 52.80289330922242, 'percent_none_sm': 0.3616636528028933, 'percent_long': 52.994555353901994, 'percent_short': 47.005444646098006}
 60: {'percent_so_sm': 51.5370705244123, 'percent_os_sm': 48.282097649186255, 'percent_none_sm': 0.18083182640144665, 'percent_long': 48.369565217391305, 'percent_short': 51.6304347826087}
 agent_num: 4434
 0: {'percent_so_sm': 0.0, 'percent_os_sm': 0.0, 'percent_none_sm': 100.0, 'percent_long': 0, 'percent_short': 0}

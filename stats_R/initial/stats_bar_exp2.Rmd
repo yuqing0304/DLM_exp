@@ -1,0 +1,241 @@
+---
+title: "stats"
+author: "Yuqing Zhang"
+date: "2024-01-24"
+output: html_document
+---
+
+
+```{r}
+# Load necessary libraries
+library(brms)
+library(tidyverse)  # For data handling, optional but helpful
+
+# --- Step 1: Load your data ---
+# Replace this with your actual data loading code
+df <- read.csv("production_initial_R_exp2.csv")
+head(df)
+```
+
+
+
+```{r}
+# Make sure condition is a factor first
+df$condition <- as.factor(df$condition)
+
+# Then set "normal" as the reference level
+df$condition <- relevel(df$condition, ref = "normal")
+
+# Check your data
+head(df)
+```
+
+
+
+
+```{r}
+# Fit model
+model_comm0 <- brm(
+  comm0 ~ condition + (1 | seed_num),
+  data = df,
+  warmup = 2000,
+  iter = 4000,
+  cores = 4,
+  chains = 4,
+  seed = 123
+)
+
+# Print summary
+print(summary(model_comm0))
+
+# Plot diagnostics and posterior
+print(mcmc_plot(model_comm0))
+
+```
+
+
+
+```{r}
+# Fit model
+model_comm30 <- brm(
+  comm30 ~ condition + (1 | seed_num),
+  data = df,
+  warmup = 2000,
+  iter = 4000,
+  cores = 4,
+  chains = 4,
+  seed = 123
+)
+
+# Print summary
+print(summary(model_comm30))
+
+# Plot diagnostics and posterior
+print(mcmc_plot(model_comm30))
+```
+
+
+
+```{r}
+fit <- brm(comm30 ~ condition + (1 | seed_num), data = df, family = gaussian())
+hypothesis(fit, "conditionimpa - conditionnoise_impa = 0")
+```
+
+
+
+```{r}
+# Fit model
+model_comm60 <- brm(
+  comm60 ~ condition + (1 | seed_num),
+  data = df,
+  warmup = 2000,
+  iter = 4000,
+  cores = 4,
+  chains = 4,
+  seed = 123
+)
+
+# Print summary
+print(summary(model_comm60))
+
+# Plot diagnostics and posterior
+print(mcmc_plot(model_comm60))
+```
+
+
+
+```{r}
+# Then set "impa" as the reference level
+df$condition <- relevel(df$condition, ref = "noise")
+```
+
+
+```{r}
+# Fit model
+model_comm0 <- brm(
+  comm0 ~ condition + (1 | seed_num),
+  data = df,
+  warmup = 2000,
+  iter = 4000,
+  cores = 4,
+  chains = 4,
+  seed = 123
+)
+
+# Print summary
+print(summary(model_comm0))
+
+# Plot diagnostics and posterior
+print(mcmc_plot(model_comm0))
+```
+
+
+
+```{r}
+# Fit model
+model_comm30 <- brm(
+  comm30 ~ condition + (1 | seed_num),
+  data = df,
+  warmup = 2000,
+  iter = 4000,
+  cores = 4,
+  chains = 4,
+  seed = 123
+)
+
+# Print summary
+print(summary(model_comm30))
+
+# Plot diagnostics and posterior
+print(mcmc_plot(model_comm30))
+```
+
+
+```{r}
+# Fit model
+model_comm60 <- brm(
+  comm60 ~ condition + (1 | seed_num),
+  data = df,
+  warmup = 2000,
+  iter = 4000,
+  cores = 4,
+  chains = 4,
+  seed = 123
+)
+
+# Print summary
+print(summary(model_comm60))
+
+# Plot diagnostics and posterior
+print(mcmc_plot(model_comm60))
+```
+
+
+
+
+```{r}
+# Then set "impa" as the reference level
+df$condition <- relevel(df$condition, ref = "limited")
+```
+
+
+```{r}
+# Fit model
+model_comm0 <- brm(
+  comm0 ~ condition + (1 | seed_num),
+  data = df,
+  warmup = 2000,
+  iter = 4000,
+  cores = 4,
+  chains = 4,
+  seed = 123
+)
+
+# Print summary
+print(summary(model_comm0))
+
+# Plot diagnostics and posterior
+print(mcmc_plot(model_comm0))
+```
+
+
+
+```{r}
+# Fit model
+model_comm30 <- brm(
+  comm30 ~ condition + (1 | seed_num),
+  data = df,
+  warmup = 2000,
+  iter = 4000,
+  cores = 4,
+  chains = 4,
+  seed = 123
+)
+
+# Print summary
+print(summary(model_comm30))
+
+# Plot diagnostics and posterior
+print(mcmc_plot(model_comm30))
+```
+
+
+```{r}
+# Fit model
+model_comm60 <- brm(
+  comm60 ~ condition + (1 | seed_num),
+  data = df,
+  warmup = 2000,
+  iter = 4000,
+  cores = 4,
+  chains = 4,
+  seed = 123
+)
+
+# Print summary
+print(summary(model_comm60))
+
+# Plot diagnostics and posterior
+print(mcmc_plot(model_comm60))
+```
+

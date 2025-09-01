@@ -1,0 +1,205 @@
+---
+title: "stats"
+author: "Yuqing Zhang"
+date: "2024-01-24"
+output: html_document
+---
+
+
+```{r}
+# Load necessary libraries
+library(brms)
+library(tidyverse)  # For data handling, optional but helpful
+
+# --- Step 1: Load your data ---
+# Replace this with your actual data loading code
+df <- read.csv("production_final_R.csv")
+head(df)
+```
+
+
+
+```{r}
+# Make sure condition is a factor first
+df$condition <- as.factor(df$condition)
+
+# Then set "normal" as the reference level
+df$condition <- relevel(df$condition, ref = "normal")
+
+# Check your data
+head(df)
+```
+
+
+
+
+```{r}
+# Fit model
+model_comm0 <- brm(
+  comm0 ~ condition + (1 | seed_num),
+  data = df,
+  warmup = 2000,
+  iter = 4000,
+  cores = 4,
+  chains = 4,
+  seed = 123
+)
+
+# Print summary
+print(summary(model_comm0))
+
+# Plot diagnostics and posterior
+print(mcmc_plot(model_comm0))
+
+```
+
+
+
+```{r}
+# Fit model
+model_comm30 <- brm(
+  comm30 ~ condition + (1 | seed_num),
+  data = df,
+  warmup = 2000,
+  iter = 4000,
+  cores = 4,
+  chains = 4,
+  seed = 123
+)
+
+# Print summary
+print(summary(model_comm30))
+
+# Plot diagnostics and posterior
+print(mcmc_plot(model_comm30))
+```
+
+
+
+```{r}
+fit <- brm(comm30 ~ condition + (1 | seed_num), data = df, family = gaussian())
+hypothesis(fit, "conditionimpa - conditionnoise_impa = 0")
+```
+
+
+
+```{r}
+# Fit model
+model_comm60 <- brm(
+  comm60 ~ condition + (1 | seed_num),
+  data = df,
+  warmup = 2000,
+  iter = 4000,
+  cores = 4,
+  chains = 4,
+  seed = 123
+)
+
+# Print summary
+print(summary(model_comm60))
+
+# Plot diagnostics and posterior
+print(mcmc_plot(model_comm60))
+```
+
+
+
+```{r}
+
+# Then set "normal" as the reference level
+df$condition <- relevel(df$condition, ref = "impa")
+```
+
+
+```{r}
+# Fit model
+model_comm0 <- brm(
+  comm0 ~ condition + (1 | seed_num),
+  data = df,
+  warmup = 2000,
+  iter = 4000,
+  cores = 4,
+  chains = 4,
+  seed = 123
+)
+
+# Print summary
+print(summary(model_comm0))
+
+# Plot diagnostics and posterior
+print(mcmc_plot(model_comm0))
+```
+
+
+
+```{r}
+# Fit model
+model_comm30 <- brm(
+  comm30 ~ condition + (1 | seed_num),
+  data = df,
+  warmup = 2000,
+  iter = 4000,
+  cores = 4,
+  chains = 4,
+  seed = 123
+)
+
+# Print summary
+print(summary(model_comm30))
+
+# Plot diagnostics and posterior
+print(mcmc_plot(model_comm30))
+```
+
+
+```{r}
+# Fit model
+model_comm60 <- brm(
+  comm60 ~ condition + (1 | seed_num),
+  data = df,
+  warmup = 2000,
+  iter = 4000,
+  cores = 4,
+  chains = 4,
+  seed = 123
+)
+
+# Print summary
+print(summary(model_comm60))
+
+# Plot diagnostics and posterior
+print(mcmc_plot(model_comm60))
+```
+
+
+
+
+```{r}
+# --- Optional Step 6: Fit a multivariate model for all DVs jointly ---
+
+# Define formulas
+formula_comm0 <- bf(comm0 ~ condition + (1 | subject))
+formula_comm30 <- bf(comm30 ~ condition + (1 | subject))
+formula_comm60 <- bf(comm60 ~ condition + (1 | subject))
+formula_spk60  <- bf(spk60  ~ condition + (1 | subject))
+
+# Fit multivariate model
+multi_model <- brm(
+  formula_comm0 + formula_comm30 + formula_comm60 + formula_spk60 + set_rescor(FALSE),
+  data = df,
+  warmup = 2000,
+  iter = 4000,
+  cores = 4,
+  chains = 4,
+  seed = 123
+)
+
+# Summary of multivariate model
+summary(multi_model)
+
+# Plot diagnostics for multivariate model
+mcmc_plot(multi_model)
+```
+
+
+

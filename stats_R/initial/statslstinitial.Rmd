@@ -1,0 +1,98 @@
+---
+title: "stats"
+author: "Yuqing Zhang"
+date: "2024-01-24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(Matrix)
+library(brms)
+
+# Directory where the CSV files are located
+directory <- "./listening"
+
+# List to store data from each file
+data <- list()
+
+# Iterate over each file in the directory
+files <- list.files(directory, pattern = "\\.csv$", full.names = TRUE)
+for (file in files) {
+  # Extract information from the file name
+  drop_value <- ifelse(str_detect(file, "0\\.1"), TRUE, FALSE)
+#  drop_value <- case_when(
+#    str_detect(file, "0\\.1") ~ "0.1",
+#    str_detect(file, "0\\.2") ~ "0.2",
+#    TRUE ~ "0"
+#)
+  skew_type <- ifelse(str_detect(file, "skewed"), TRUE, FALSE)
+  lang_value <- case_when(
+    str_detect(file, "long") ~ "long",
+    str_detect(file, "local") ~ "local",
+    TRUE ~ "mix"
+  )
+  
+  # Read the CSV file
+  # df <- read.csv(file)
+  df <- read.delim(file)
+
+  # df$avg_acc <- rowMeans(df[, c("acc_verb", "acc_subject", "acc_object", "acc_subjectm1", "acc_subjectm2", "acc_subjectm3")], na.rm = TRUE)
+
+  # Add columns to the data frame
+  df <- df %>% mutate(drop = drop_value, skew = skew_type, lang = lang_value)
+
+  # Append to the list
+  data <- append(data, list(df))
+}
+
+# Combine all data frames into a single data frame
+combined_data <- bind_rows(data)
+
+selected_data <- combined_data %>%
+  select(acc, epoch, drop, skew, lang)
+
+#selected_data$epoch_c <- scale(selected_data$epoch)
+selected_data$epoch_end <- scale(selected_data$epoch, center = 60, scale = 60)
+
+selected_data$subject <- rep(1:(nrow(selected_data) / 60), each = 60)
+
+selected_data$lang <- factor(selected_data$lang)
+selected_data$drop <- factor(selected_data$drop)
+selected_data$skew <- factor(selected_data$skew)
+selected_data$subject <- factor(selected_data$subject)
+
+# Save the combined data frame to a new CSV file
+# write.csv(selected_data, "/Volumes/Untitled/Downloads/plots/statistical_analysis/combined_datainitial.csv", row.names = FALSE)
+# write.csv(selected_data, "./combined_datalstinitial.csv", row.names = FALSE)
+```
+
+
+
+```{r}
+lstinitial.model <- brm(acc ~ epoch_end * drop * skew * lang + (1|subject),
+                data = selected_data,
+                warmup = 2000, iter = 4000,
+                cores = 4, chains = 4#,
+                #control = list(adapt_delta = 0.99, max_treedepth = 15)
+                )
+print(summary(lstinitial.model), digits = 3)
+mcmc_plot(lstinitial.model)
+```
+
+
+
+
+```{r}
+lstinitial.model2 <- brm(acc ~ epoch_end + drop * skew * lang + (1|subject),
+                data = selected_data,
+                warmup = 2000, iter = 4000,
+                cores = 4, chains = 4#,
+                #control = list(adapt_delta = 0.99, max_treedepth = 15)
+                )
+print(summary(lstinitial.model2), digits = 3)
+mcmc_plot(lstinitial.model2)
+```
+
